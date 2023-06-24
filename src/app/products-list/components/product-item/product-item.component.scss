@@ -1,3 +1,9 @@
 :host {
   cursor: pointer;
+  transition: var(--app-shadow-animation);
+
+  &:hover {
+    box-shadow: var(--app-shadow);
+    transition: var(--app-shadow-animation);
+  }
 }
