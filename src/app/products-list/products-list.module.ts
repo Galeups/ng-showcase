@@ -1,11 +1,17 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ProductsListComponent } from './products-list.component';
 import { RouterOutlet } from '@angular/router';
 import { ProductsListRoutingModule } from './products-list-routing.module';
+import { ProductItemComponent } from './components/product-item/product-item.component';
 
 @NgModule({
-  declarations: [ProductsListComponent],
-  imports: [CommonModule, RouterOutlet, ProductsListRoutingModule],
+  declarations: [ProductsListComponent, ProductItemComponent],
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    ProductsListRoutingModule,
+    NgOptimizedImage,
+  ],
 })
 export class ProductsListModule {}
