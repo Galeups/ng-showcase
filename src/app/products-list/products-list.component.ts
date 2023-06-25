@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ProductListService } from './services/product-list.service';
-import { map, tap } from 'rxjs';
 import { Router } from '@angular/router';
-import { Routs } from '../core/models';
+import { Routs } from '@core/models';
 
 @Component({
   selector: 'app-products-list',

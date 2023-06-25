@@ -9,6 +9,8 @@
   <div class="card-body">
     <h5 class="card-title text-black-50">{{ product.title }}</h5>
     <p class="card-text">{{ product.description }}</p>
-    <div class="mb-2 font-weight-bold h4">Цена: {{ product.price }}</div>
+    <div class="mb-2 font-weight-bold h4">
+      Цена: {{ product.price | number : "1.2" }}
+    </div>
   </div>
 </div>
