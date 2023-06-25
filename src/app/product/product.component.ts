@@ -5,7 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Product, ProductForm } from './models/product';
+import { Product, ProductForm } from '../core/models';
 import { Router } from '@angular/router';
 import { ProductService } from './services/product.service';
 

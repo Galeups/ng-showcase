@@ -1,12 +1,11 @@
 <div class="container">
   <h1 class="text-center mt-3">Каталог</h1>
 
-  <div class="list">
-    <app-product-item></app-product-item>
-    <app-product-item></app-product-item>
-    <app-product-item></app-product-item>
-    <app-product-item></app-product-item>
-    <app-product-item></app-product-item>
-    <app-product-item></app-product-item>
+  <div class="list" *ngIf="products$ | async as products">
+    <app-product-item
+      (click)="openProduct(product.id!)"
+      *ngFor="let product of products.data"
+      [product]="product"
+    ></app-product-item>
   </div>
 </div>

@@ -6,7 +6,7 @@ import { Environment } from '../app/core/models';
 
 export const environment: Environment = {
   production: false,
-  api: '',
+  api: 'https://test.xyz.com/api',
 };
 
 /*
