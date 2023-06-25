@@ -4,4 +4,7 @@
   --app-text-normal: 400;
   --app-text-medium: 500;
   --app-text-bold: 700;
+  --app-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  --app-animation-duration: 150ms;
+  --app-shadow-animation: box-shadow 150ms ease-in-out;
 }

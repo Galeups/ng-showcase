@@ -1,0 +1,10 @@
+:host {
+  display: block;
+  padding-top: 1.5rem;
+}
+
+.btn {
+  & + & {
+    margin-left: 0.5rem;
+  }
+}
