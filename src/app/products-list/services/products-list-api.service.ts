@@ -1,8 +1,8 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { MOCK_API_URL_TOKEN } from '../../core/tokens/mock-api-url.token';
+import { MOCK_API_URL_TOKEN } from '@core/tokens/mock-api-url.token';
 import { catchError, map, Observable, of, startWith } from 'rxjs';
-import { Product, Resource, ServerResponse } from '../../core/models';
+import { Product, Resource, ServerResponse } from '@core/models';
 
 @Injectable()
 export class ProductsListApiService {
@@ -27,8 +27,8 @@ export class ProductsListApiService {
         }),
         catchError(() =>
           of({
-            isLoading: true,
-            hasError: false,
+            isLoading: false,
+            hasError: true,
             data: null,
           })
         )

@@ -7,6 +7,8 @@ import { HttpResponse } from '@angular/common/http';
   providedIn: 'root',
 })
 export class MockBackendService {
+  private readonly mockProductsList = this.generateProducts();
+
   constructor() {}
 
   get(url: string) {
@@ -28,15 +30,13 @@ export class MockBackendService {
   private getProducts() {
     return new HttpResponse({
       status: 200,
-      body: responseSuccess(this.generateProducts()),
+      body: responseSuccess(this.mockProductsList),
     });
   }
 
   private getProduct(url: string) {
     const id = Number(url.split('/').at(-1));
-    const product = this.generateProducts().some(
-      (product) => product.id === id
-    );
+    const product = this.mockProductsList.find((product) => product.id === id);
 
     return new HttpResponse({
       status: 200,
