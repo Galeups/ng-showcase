@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Product, ProductForm, Resource } from '@core/models';
+import { ProductForm } from '@core/models';
 import { ProductApiService } from './product-api.service';
-import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
 @Injectable()
@@ -13,8 +12,8 @@ export class ProductService {
     private readonly route: ActivatedRoute
   ) {}
 
-  getProduct(): Observable<Resource<Product>> {
-    return this.productApi.getProduct(this.productId);
+  getProduct() {
+    return this.productApi.get(this.productId);
   }
 
   submit(product: Partial<ProductForm>) {

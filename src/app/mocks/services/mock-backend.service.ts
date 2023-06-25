@@ -19,8 +19,21 @@ export class MockBackendService {
     return this.getProduct(url);
   }
 
-  post<T>(url: string, body: T) {
-    return responseSuccess([]);
+  post<T extends MockProductDto>(url: string, body: T) {
+    const productIndex = this.mockProductsList.findIndex(
+      (product) => product.id === body.id
+    );
+
+    const newProductsList = [...this.mockProductsList];
+    if (productIndex) {
+      newProductsList[productIndex] = {
+        ...newProductsList[productIndex],
+        title: body.title,
+        description: body.description,
+      };
+    }
+
+    return responseSuccess(newProductsList);
   }
 
   delete(url: string) {
