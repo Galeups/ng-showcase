@@ -1,8 +1,14 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MOCK_API_URL_TOKEN } from '@core/tokens/mock-api-url.token';
-import { catchError, map, Observable, of, startWith } from 'rxjs';
-import { Product, Resource, ServerResponse } from '@core/models';
+import { catchError, map, of, startWith } from 'rxjs';
+import {
+  loadedResourceError,
+  loadedResourceSuccess,
+  loadResource,
+  Product,
+  ServerResponse,
+} from '@core/models';
 
 @Injectable()
 export class ProductsListApiService {
@@ -11,27 +17,13 @@ export class ProductsListApiService {
     @Inject(MOCK_API_URL_TOKEN) private readonly apiUrl: string
   ) {}
 
-  getProducts(): Observable<Resource<Product[]>> {
+  getProducts() {
     return this.http
       .get<ServerResponse<Product[]>>(`${this.apiUrl}/products`)
       .pipe(
-        map((resolve) => ({
-          isLoading: false,
-          hasError: false,
-          data: resolve.data,
-        })),
-        startWith({
-          isLoading: true,
-          hasError: false,
-          data: null,
-        }),
-        catchError(() =>
-          of({
-            isLoading: false,
-            hasError: true,
-            data: null,
-          })
-        )
+        map((resolve) => loadedResourceSuccess(resolve.data)),
+        startWith(loadResource<null>()),
+        catchError(() => of(loadedResourceError<null>()))
       );
   }
 }

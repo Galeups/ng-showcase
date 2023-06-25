@@ -33,13 +33,7 @@ export class ProductComponent implements OnInit {
     private readonly productService: ProductService
   ) {}
 
-  ngOnInit(): void {
-    this.productService.getProduct().subscribe((product) => {
-      if (product.data) {
-        this.fillForm(product.data);
-      }
-    });
-  }
+  ngOnInit(): void {}
 
   onCancel() {
     this.router.navigate(['/']);
