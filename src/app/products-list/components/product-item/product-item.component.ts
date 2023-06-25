@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Product } from '../../../core/models';
 
 @Component({
   selector: 'app-product-item',
@@ -7,12 +7,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./product-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProductItemComponent implements OnInit {
-  constructor(private readonly router: Router) {}
-
-  ngOnInit(): void {}
-
-  openProduct() {
-    this.router.navigate(['product/123']);
-  }
+export class ProductItemComponent {
+  @Input() product!: Product;
 }
