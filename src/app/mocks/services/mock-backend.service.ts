@@ -10,13 +10,11 @@ export class MockBackendService {
   constructor() {}
 
   get(url: string) {
-    switch (url) {
-      default:
-        return new HttpResponse({
-          status: 200,
-          body: responseSuccess(this.generateProducts()),
-        });
+    if (url.includes('products')) {
+      return this.getProducts();
     }
+
+    return this.getProduct(url);
   }
 
   post<T>(url: string, body: T) {
@@ -25,6 +23,25 @@ export class MockBackendService {
 
   delete(url: string) {
     return responseSuccess(true);
+  }
+
+  private getProducts() {
+    return new HttpResponse({
+      status: 200,
+      body: responseSuccess(this.generateProducts()),
+    });
+  }
+
+  private getProduct(url: string) {
+    const id = Number(url.split('/').at(-1));
+    const product = this.generateProducts().some(
+      (product) => product.id === id
+    );
+
+    return new HttpResponse({
+      status: 200,
+      body: responseSuccess(product),
+    });
   }
 
   private generateProducts(): MockProductDto[] {
