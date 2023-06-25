@@ -13,7 +13,7 @@ export class ProductsListApiService {
 
   getProducts(): Observable<Resource<Product[]>> {
     return this.http
-      .get<ServerResponse<Product[]>>(`${this.apiUrl}/mock/products`)
+      .get<ServerResponse<Product[]>>(`${this.apiUrl}/products`)
       .pipe(
         map((resolve) => ({
           isLoading: false,
