@@ -1,8 +1,15 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MOCK_API_URL_TOKEN } from '@core/tokens/mock-api-url.token';
-import { Product, Resource, ServerResponse } from '@core/models';
-import { catchError, map, Observable, of, startWith } from 'rxjs';
+import {
+  loadedResourceError,
+  loadedResourceSuccess,
+  loadResource,
+  Product,
+  ServerResponse,
+} from '@core/models';
+import { catchError, map, of, startWith } from 'rxjs';
+import { ProductPostDto } from '../models/product-post-dto';
 
 @Injectable()
 export class ProductApiService {
@@ -11,27 +18,21 @@ export class ProductApiService {
     @Inject(MOCK_API_URL_TOKEN) private readonly apiUrl: string
   ) {}
 
-  getProduct(productId: number): Observable<Resource<Product>> {
+  get(productId: number) {
     return this.http
       .get<ServerResponse<Product>>(`${this.apiUrl}/product/${productId}`)
       .pipe(
-        map((resolve) => ({
-          isLoading: false,
-          hasError: false,
-          data: resolve.data,
-        })),
-        startWith({
-          isLoading: true,
-          hasError: false,
-          data: null,
-        }),
-        catchError(() =>
-          of({
-            isLoading: false,
-            hasError: true,
-            data: null,
-          })
-        )
+        map((resolve) => loadedResourceSuccess<Product>(resolve.data)),
+        startWith(loadResource<null>()),
+        catchError(() => of(loadedResourceError<null>()))
       );
+  }
+
+  update(body: ProductPostDto) {
+    return this.http.post<ServerResponse<Product[]>>('', body).pipe(
+      map((resolve) => loadedResourceSuccess<Product[]>(resolve.data)),
+      startWith(loadResource<null>()),
+      catchError(() => of(loadedResourceError<null>()))
+    );
   }
 }
